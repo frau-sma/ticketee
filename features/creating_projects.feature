@@ -10,7 +10,7 @@ Feature: Creating projects
   Scenario: Creating a project
     And I create a new project
     Then I should see the project created verification message
-    And I should be on the project page for the new project
+    And I should be on the relevant project page
 
   Scenario: Creating a project without a name
     And I try to create a project without a name
