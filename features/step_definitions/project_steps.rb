@@ -40,3 +40,29 @@ Then /^I should be on the relevant project page$/ do
   page.should have_content('TextMate 2 :: Projects :: Ticketee')
 end
 
+When /^I edit that project$/ do
+  click_link 'Edit Project'
+end
+
+When /^I fill in new information$/ do
+  fill_in 'Name', :with => 'TextMate 3'
+  click_button 'Update Project'
+end
+
+Then /^I should see the project updated verification message$/ do
+  page.should have_content 'Project has been updated.'
+end
+
+Then /^I should be on the edited project's page$/ do
+  current_path.should == project_path(Project.find_by_name!('TextMate 3'))
+  page.should have_content('TextMate 3 :: Projects :: Ticketee')
+end
+
+When /^I fill in invalid information$/ do
+  fill_in 'Name', :with => ''
+  click_button 'Update Project'
+end
+
+Then /^I should be informed that the project has not been updated$/ do
+  page.should have_content 'Project has not been updated.'
+end
