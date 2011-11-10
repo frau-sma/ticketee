@@ -66,3 +66,19 @@ end
 Then /^I should be informed that the project has not been updated$/ do
   page.should have_content 'Project has not been updated.'
 end
+
+When /^I ask that the project be deleted$/ do
+  click_link 'Delete Project'
+end
+
+Then /^I should see the project deleted verification message$/ do
+  page.should have_content 'Project has been deleted.'
+end
+
+Then /^I should be on the home page$/ do
+  current_path.should == projects_path
+end
+
+Then /^the project should not be there any more$/ do
+  page.should_not have_content 'TextMate 2'
+end
