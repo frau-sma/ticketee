@@ -43,3 +43,57 @@ end
 Then /^I should be told that the description is too short$/ do
   page.should have_content 'Description is too short'
 end
+
+Given /^the project has a ticket$/ do
+  @project.tickets.create!(:title => 'Make it shiny!', :description => 'Gradients! Starbursts! Oh my!')
+end
+
+Given /^another project exists$/ do
+  @project = Factory(:project, :name => 'Project #2')
+end
+
+Given /^the second project has a different ticket$/ do
+  @project.tickets.create!(:title => 'Standards compliance', :description => "Isn't a joke.")
+end
+
+Then /^I should see the first project's ticket$/ do
+  page.should have_content 'Make it shiny!'
+end
+
+Then /^I should not see the second project's ticket$/ do
+  page.should_not have_content 'Standards compliance'
+end
+
+When /^I navigate to the first ticket's page$/ do
+  click_link 'Make it shiny!'
+end
+
+Then /^I should see the first ticket's information$/ do
+  page.find('#ticket h2').should have_content 'Make it shiny!'
+  page.should have_content 'Gradients! Starbursts! Oh my!'
+end
+
+When /^I go back to the home page$/ do
+  click_link 'Ticketee'
+end
+
+When /^I navigate to the second project's page$/ do
+  click_link 'Project #2'
+end
+
+Then /^I should see the second project's ticket$/ do
+  page.should have_content 'Standards compliance'
+end
+
+Then /^I should not see the first project's ticket$/ do
+  page.should_not have_content 'Make it shiny!'
+end
+
+When /^I navigate to the second ticket's page$/ do
+  click_link 'Standards compliance'
+end
+
+Then /^I should see the second ticket's information$/ do
+  page.find('#ticket h2').should have_content 'Standards compliance'
+  page.should have_content "Isn't a joke."
+end

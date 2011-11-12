@@ -28,7 +28,7 @@ Then /^I should be told that the name is required$/ do
 end
 
 Given /^a project exists$/ do
-  Factory(:project, :name => 'TextMate 2')
+  @project = Factory(:project, :name => 'TextMate 2')
 end
 
 When /^I navigate to the project's page$/ do
