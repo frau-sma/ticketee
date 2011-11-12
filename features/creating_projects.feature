@@ -4,7 +4,9 @@ Feature: Creating projects
   I want to create them easily
 
   Background:
-    Given I am on the home page
+    Given I am an admin user
+    And I am signed in
+    And I am on the home page
     When I navigate to the project creation page
 
   Scenario: Creating a project

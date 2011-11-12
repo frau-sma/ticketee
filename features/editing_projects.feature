@@ -4,7 +4,9 @@ Feature: Editing Projects
   I want to be able to do that through an interface
 
   Background:
-    Given a project exists
+    Given I am an admin user
+    And I am signed in
+    And a project exists
     And I am on the home page
     When I navigate to the project's page
     And I edit that project

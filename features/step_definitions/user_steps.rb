@@ -39,3 +39,18 @@ When /^I fill in my user details$/ do
   fill_in 'Password', :with => 'password'
   click_button 'Sign in'
 end
+
+Given /^I am an admin user$/ do
+  @user = User.create!(:email => 'user@ticketee.org', :password => 'password')
+  @user.update_attribute('admin', true)
+  @user.confirm!
+end
+
+Given /^I am signed in$/ do
+  steps(%Q{
+    Given I am on the home page
+    When I navigate to the sign-in page
+    And I fill in my user details
+    Then I should be signed in
+  })
+end

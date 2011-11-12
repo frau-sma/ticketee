@@ -4,7 +4,9 @@ Feature: Deleting projects
   I want to be able to delete them
 
   Scenario: Deleting a project
-    Given a project exists
+    Given I am an admin user
+    And I am signed in
+    And a project exists
     And I am on the home page
     When I navigate to the project's page
     And I ask that the project be deleted
