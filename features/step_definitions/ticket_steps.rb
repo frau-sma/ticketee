@@ -127,3 +127,11 @@ end
 Then /^I should be informed that the ticket has not been updated$/ do
   page.should have_content 'Ticket has not been updated.'
 end
+
+When /^I ask for the ticket to be deleted$/ do
+  click_link 'Delete Ticket'
+end
+
+Then /^I should see the ticket deleted verification message$/ do
+  page.should have_content 'Ticket has been deleted.'
+end
