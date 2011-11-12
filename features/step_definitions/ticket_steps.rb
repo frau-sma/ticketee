@@ -97,3 +97,33 @@ Then /^I should see the second ticket's information$/ do
   page.find('#ticket h2').should have_content 'Standards compliance'
   page.should have_content "Isn't a joke."
 end
+
+When /^I ask to edit the ticket$/ do
+  click_link 'Edit Ticket'
+end
+
+When /^I fill in valid new ticket information$/ do
+  fill_in 'Title', :with => 'Make it really shiny!'
+  click_button 'Update Ticket'
+end
+
+Then /^I should see the ticket updated verification message$/ do
+  page.should have_content 'Ticket has been updated.'
+end
+
+Then /^I should be on the updated ticket's page$/ do
+  project = Project.find_by_name!('TextMate 2')
+  ticket = project.tickets.find_by_title!('Make it really shiny!')
+  current_path.should == project_ticket_path(project, ticket)
+  page.should have_content 'Make it really shiny!'
+  page.should_not have_content 'Make it shiny!'
+end
+
+When /^I fill in invalid new ticket information$/ do
+  fill_in 'Title', :with => ''
+  click_button 'Update Ticket'
+end
+
+Then /^I should be informed that the ticket has not been updated$/ do
+  page.should have_content 'Ticket has not been updated.'
+end
