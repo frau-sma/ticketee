@@ -4,12 +4,14 @@ Feature: Editing tickets
   I want to be able to edit tickets
 
   Background:
-    Given a project exists
+    Given I am a confirmed user
+    And a project exists
     And the project has a ticket
     And I am on the home page
     When I navigate to the project's page
     And I navigate to the first ticket's page
     And I ask to edit the ticket
+    Then I should have to sign in
 
   Scenario: Updating a ticket
     When I fill in valid new ticket information

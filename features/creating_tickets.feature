@@ -5,14 +5,17 @@ Feature: Creating Tickets
 
   Background:
     Given a project exists
+    And I am a confirmed user
     And I am on the home page
     When I navigate to the project's page
     And I create a ticket
+    Then I should have to sign in
 
   Scenario: Creating a ticket
     When I fill in valid ticket information
     Then I should see the ticket created verification message
     And I should be on the new ticket's page
+    And the ticket should be attributed to me
 
   Scenario: Creating a ticket with invalid attributes
     When I fill in invalid ticket information

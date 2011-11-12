@@ -4,7 +4,8 @@ Feature: Viewing tickets
   I want to see them on that project's page
 
   Background:
-    Given a project exists
+    Given I am a confirmed user
+    And a project exists
     And the project has a ticket
     And another project exists
     And the second project has a different ticket

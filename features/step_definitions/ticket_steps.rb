@@ -2,6 +2,13 @@ When /^I create a ticket$/ do
   click_link 'New Ticket'
 end
 
+Then /^I should have to sign in$/ do
+  page.should have_content 'You need to sign in or sign up before continuing.'
+  fill_in 'Email', :with => 'user@ticketee.org'
+  fill_in 'Password', :with => 'password'
+  click_button 'Sign in'
+end
+
 When /^I fill in valid ticket information$/ do
   fill_in 'Title', :with => 'Non-standards compliance'
   fill_in 'Description', :with => 'My pages are ugly!'
@@ -16,6 +23,10 @@ Then /^I should be on the new ticket's page$/ do
   project = Project.find_by_name!('TextMate 2')
   ticket = project.tickets.find_by_title!('Non-standards compliance')
   current_path.should == project_ticket_path(project, ticket)
+end
+
+Then /^the ticket should be attributed to me$/ do
+  page.should have_content 'Created by user@ticketee.org'
 end
 
 When /^I fill in invalid ticket information$/ do
@@ -45,7 +56,7 @@ Then /^I should be told that the description is too short$/ do
 end
 
 Given /^the project has a ticket$/ do
-  @project.tickets.create!(:title => 'Make it shiny!', :description => 'Gradients! Starbursts! Oh my!')
+  @project.tickets.create!(:title => 'Make it shiny!', :description => 'Gradients! Starbursts! Oh my!', :user => User.find_by_email!('user@ticketee.org'))
 end
 
 Given /^another project exists$/ do
@@ -53,7 +64,7 @@ Given /^another project exists$/ do
 end
 
 Given /^the second project has a different ticket$/ do
-  @project.tickets.create!(:title => 'Standards compliance', :description => "Isn't a joke.")
+  @project.tickets.create!(:title => 'Standards compliance', :description => "Isn't a joke.", :user => User.find_by_email!('user@ticketee.org'))
 end
 
 Then /^I should see the first project's ticket$/ do

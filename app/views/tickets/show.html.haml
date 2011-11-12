@@ -1,5 +1,6 @@
 #ticket
   %h2= @ticket.title
+  %p.creator Created by #{@ticket.user.email}.
   %p
     = link_to 'Edit Ticket', [:edit, @project, @ticket]
     %br

@@ -154,6 +154,12 @@ menu, #ticket .state, .states {
   text-decoration: none;
 }
 
+#ticket .creator
+{
+  font-size: smaller;
+  margin-bottom: 0.75em;
+}
+
 .new_comment { 
   padding: 15px;
   background: #eaeaea;
