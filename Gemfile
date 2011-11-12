@@ -38,6 +38,8 @@ group :test do
   gem 'factory_girl'
 end
 
+gem 'devise', '~> 1.4.3'
+
 group :test, :development do
   gem 'rspec-rails', '~> 2.5'
 end
