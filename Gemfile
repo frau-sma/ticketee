@@ -7,7 +7,7 @@ gem 'rails', '3.1.0'
 
 gem 'sqlite3'
 
-gem 'haml'
+gem 'haml-rails'
 gem 'dynamic_form'
 
 # Gems used only for assets and not required
