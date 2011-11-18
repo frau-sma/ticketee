@@ -5,8 +5,8 @@ Feature: Signing in
 
   Scenario: Signing in via confirmation
     Given I am an unconfirmed user
-    And "user@ticketee.org" opens the email with subject "Confirmation instructions"
-    And they click the first link in the email
+    And I open the confirmation e-mail
+    And I click the confirmation link
     Then I should see the registration confirmation message
     And I should be signed in
 

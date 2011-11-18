@@ -17,6 +17,14 @@ Given /^I am an unconfirmed user$/ do
   @user = User.create!(:email => 'user@ticketee.org', :password => 'password')
 end
 
+Given /^I open the confirmation e-mail$/ do
+  open_email('user@ticketee.org', :with_subject => 'Confirmation instructions')
+end
+
+Given /^I click the confirmation link$/ do
+  click_first_link_in_email
+end
+
 Then /^I should see the registration confirmation message$/ do
   page.should have_content 'Your account was successfully confirmed.'
 end
